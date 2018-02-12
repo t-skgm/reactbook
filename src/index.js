@@ -5,16 +5,29 @@ const createReactClass = require('create-react-class');
 
 const Component = createReactClass({
   propTypes: {
-    name: PropTypes.string.isRequired
+    firstName: PropTypes.string.isRequired,
+    middleName: PropTypes.string,
+    familyName: PropTypes.string.isRequired,
+    address: PropTypes.string
   },
+
+  getDefaultProps: function() {
+    return {
+      middleName: '',
+      address: 'unknown'
+    };
+  },
+
   render: function() {
-    return <span>I'm { this.props.name }.</span>;
+    return <span>I'm { this.props.firstName } { this.props.middleName } { this.props.familyName } from { this.props.address }.</span>;
   }
 });
 
 ReactDOM.render(
   React.createElement(Component, {
-    // name: "Bob"
+    firstName: "Arthur",
+    middleName: "Charles",
+    familyName: "Clarke"
   }),
   document.getElementById("app")
 );
