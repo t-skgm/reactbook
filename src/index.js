@@ -23,11 +23,28 @@ const Component = createReactClass({
   }
 });
 
+const TextAreaCounter = createReactClass({
+  propTypes: {
+    text: PropTypes.string
+  },
+
+  getDefaultProps: function() {
+    return {
+      text: ''
+    };
+  },
+
+  render: function() {
+    return <div>
+      <textarea>{ this.props.text }</textarea>
+    <h3>{ this.props.text.length }</h3>
+    </div>;
+  }
+});
+
 ReactDOM.render(
-  React.createElement(Component, {
-    firstName: "Arthur",
-    middleName: "Charles",
-    familyName: "Clarke"
+  React.createElement(TextAreaCounter, {
+    text: "Arthur"
   }),
   document.getElementById("app")
 );
