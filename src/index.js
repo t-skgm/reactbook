@@ -34,11 +34,23 @@ const TextAreaCounter = createReactClass({
     };
   },
 
+  getInitialState: function() {
+    return {
+      text: this.props.text
+    }
+  },
+
+  _textChange: function(ev) {
+    this.setState({
+      text: ev.target.value
+    })
+  },
+
   render: function() {
     return <div>
-      <textarea>{ this.props.text }</textarea>
-    <h3>{ this.props.text.length }</h3>
-    </div>;
+        <textarea onChange={ this._textChange } defaultValue={ this.props.text }></textarea>
+        <h3>{ this.state.text.length }</h3>
+      </div>;
   }
 });
 
