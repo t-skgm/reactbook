@@ -1,7 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+const createReactClass = require('create-react-class');
+
+const Component = createReactClass({
+  render: function() {
+    return <span>I'm { this.props.name }.</span>;
+  }
+});
 
 ReactDOM.render(
-  <h1>Hello, world</h1>,
+  React.createElement(Component, {
+    name: "Bob"
+  }),
   document.getElementById("app")
 );
