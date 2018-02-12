@@ -1,0 +1,17 @@
+.DS_STORE
+node_modules
+*~
+__benchmarks__
+build/
+coverage/
+flow-coverage/
+tmp/
+.cache
+.module-cache
+fixtures/dom/public/react-dom.js
+fixtures/dom/public/react.js
+*.log*
+*.iml
+*.swp
+*.swo
+

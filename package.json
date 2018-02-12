@@ -1,0 +1,26 @@
+{
+  "name": "reactbook",
+  "version": "1.0.0",
+  "description": "practice with reactbook",
+  "main": "index.js",
+  "dependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "devDependencies": {
+    "babel-preset-react-app": "^3.1.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/t-skgm/reactbook.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/t-skgm/reactbook/issues"
+  },
+  "homepage": "https://github.com/t-skgm/reactbook#readme"
+}
