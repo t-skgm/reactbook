@@ -3,6 +3,7 @@ node_modules
 *~
 __benchmarks__
 build/
+dist/
 coverage/
 flow-coverage/
 tmp/
