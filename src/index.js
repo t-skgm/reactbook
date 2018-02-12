@@ -25,38 +25,40 @@ const Component = createReactClass({
 
 const TextAreaCounter = createReactClass({
   propTypes: {
-    text: PropTypes.string
+    textAreaValue: PropTypes.string
   },
 
   getDefaultProps: function() {
     return {
-      text: ''
+      textAreaValue: 'initial'
     };
   },
 
   getInitialState: function() {
     return {
-      text: this.props.text
-    }
+      textAreaValue: this.props.textAreaValue
+    };
   },
 
   _textChange: function(ev) {
     this.setState({
-      text: ev.target.value
+      textAreaValue: ev.target.value
     })
   },
 
   render: function() {
-    return <div>
-        <textarea onChange={ this._textChange } defaultValue={ this.props.text }></textarea>
-        <h3>{ this.state.text.length }</h3>
-      </div>;
+    return (
+      <div>
+        <textarea onChange={ this._textChange } defaultValue={ this.props.textAreaValue }></textarea>
+      <h3>{ this.state.textAreaValue.length }</h3>
+      </div>
+    );
   }
 });
 
 ReactDOM.render(
   React.createElement(TextAreaCounter, {
-    text: "Arthur"
+    textAreaValue: "Arthur"
   }),
   document.getElementById("app")
 );
