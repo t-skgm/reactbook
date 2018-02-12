@@ -2,7 +2,7 @@
   "name": "reactbook",
   "version": "1.0.0",
   "description": "practice with reactbook",
-  "main": "01.01.hello.js",
+  "main": "index.js",
   "dependencies": {},
   "devDependencies": {
     "babel-preset-env": "^1.6.1",
