@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types'
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 const createReactClass = require('create-react-class');
 
 const Component = createReactClass({
@@ -51,14 +52,10 @@ const logMixin = {
 
 const Counter = createReactClass({
   name: 'Counter',
-  // mixins: [logMixin],
+  mixins: [PureRenderMixin],
 
   propTypes: {
     count: PropTypes.number.isRequired,
-  },
-
-  shouldComponentUpdate(nextProps, _nextState) {
-    return nextProps.count !== this.props.count;
   },
 
   render: function() {

@@ -5,7 +5,8 @@
   "main": "index.js",
   "dependencies": {
     "create-react-class": "^15.6.3",
-    "prop-types": "^15.6.0"
+    "prop-types": "^15.6.0",
+    "react-addons-pure-render-mixin": "^15.6.2"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
