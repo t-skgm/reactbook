@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "practice with reactbook",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "create-react-class": "^15.6.3",
+    "prop-types": "^15.6.0",
+    "react-addons-pure-render-mixin": "^15.6.2"
+  },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
