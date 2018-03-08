@@ -51,20 +51,25 @@ const logMixin = {
 
 const Counter = createReactClass({
   name: 'Counter',
-  mixins: [logMixin],
+  // mixins: [logMixin],
 
   propTypes: {
     count: PropTypes.number.isRequired,
   },
 
+  shouldComponentUpdate(nextProps, _nextState) {
+    return nextProps.count !== this.props.count;
+  },
+
   render: function() {
+    console.log(this.name + '::render()');
     return <span>{ this.props.count }</span>;
   },
 });
 
 const TextAreaCounter = createReactClass({
   name: 'TextAreaCounter',
-  mixins: [logMixin],
+  // mixins: [logMixin],
 
   propTypes: {
     defaultValue: PropTypes.string
@@ -95,6 +100,7 @@ const TextAreaCounter = createReactClass({
   },
 
   render: function() {
+    console.log(this.name + '::render()');
     let counter = null;
     if (this.state.text.length > 0) {
       counter = <h3><Counter count={ this.state.text.length }/></h3>;
