@@ -23,7 +23,36 @@ const Component = createReactClass({
   }
 });
 
+const logMixin = {
+  _log: function(methodName, args) {
+    console.log(this.name + '::' + methodName, args);
+  },
+
+  componentWillUpdate: function() {
+    this._log('componentWillUpdate', arguments);
+  },
+
+  componentDidUpdate: function() {
+    this._log('componentDidUpdate', arguments);
+  },
+
+  componentWillMount: function() {
+    this._log('componentWillMount', arguments);
+  },
+
+  componentDidMount: function() {
+    this._log('componentDidMount', arguments);
+  },
+
+  componentWillUnmount: function() {
+    this._log('componentWillUnmount', arguments);
+  },
+};
+
 const TextAreaCounter = createReactClass({
+  name: 'TextAreaCounter',
+  mixins: [logMixin],
+
   propTypes: {
     defaultValue: PropTypes.string
   },
@@ -46,32 +75,6 @@ const TextAreaCounter = createReactClass({
     })
   },
 
-  _log: function(methodName, args) {
-    console.log(methodName, args);
-  },
-
-  componentWillUpdate: function() {
-    this._log('componentWillUpdate', arguments);
-  },
-
-  componentDidUpdate: function(oldProps, oldState) {
-    if (this.state.text.length > 3) {
-      this.replaceState(oldState);
-    }
-  },
-
-  componentWillMount: function() {
-    this._log('componentWillMount', arguments);
-  },
-
-  componentDidMount: function() {
-    this._log('componentDidMount', arguments);
-  },
-
-  componentWillUnmount: function() {
-    this._log('componentWillUnmount', arguments);
-  },
-
   componentWillReceiveProps: function(newProps) {
     this.setState({
       text: newProps.defaultValue,
@@ -90,7 +93,7 @@ const TextAreaCounter = createReactClass({
 
 const myTextAreaCounter = ReactDOM.render(
   React.createElement(TextAreaCounter, {
-    defaultValue: "abc"
+    defaultValue: "Arthur"
   }),
   document.getElementById("app")
 );
