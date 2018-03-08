@@ -46,6 +46,32 @@ const TextAreaCounter = createReactClass({
     })
   },
 
+  _log: function(methodName, args) {
+    console.log(methodName, args);
+  },
+
+  componentWillUpdate: function() {
+    this._log('componentWillUpdate', arguments);
+  },
+
+  componentDidUpdate: function(oldProps, oldState) {
+    if (this.state.text.length > 3) {
+      this.replaceState(oldState);
+    }
+  },
+
+  componentWillMount: function() {
+    this._log('componentWillMount', arguments);
+  },
+
+  componentDidMount: function() {
+    this._log('componentDidMount', arguments);
+  },
+
+  componentWillUnmount: function() {
+    this._log('componentWillUnmount', arguments);
+  },
+
   componentWillReceiveProps: function(newProps) {
     this.setState({
       text: newProps.defaultValue,
@@ -59,12 +85,12 @@ const TextAreaCounter = createReactClass({
         <h3>{ this.state.text.length }</h3>
       </div>
     );
-  }
+  },
 });
 
 const myTextAreaCounter = ReactDOM.render(
   React.createElement(TextAreaCounter, {
-    defaultValue: "Arthur"
+    defaultValue: "abc"
   }),
   document.getElementById("app")
 );
