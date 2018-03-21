@@ -17,11 +17,27 @@ const data = [
   ["The Hobbit", "J. R. R. Tolkien", "English", "1937", "100 million"],
   ["And Then There Were None", "Agatha Christie", "English", "1939", "100 million"],
   ["紅樓夢/红楼梦 (Dream of the Red Chamber)", "Cao Xueqin", "Chinese", "1754", "100 million"],
-  ["Alice's Adventures in Wonderland", "Lewis Carroll", "English", "1865", "100 million"]
+  ["Alice's Adventures in Wonderland", "Lewis Carroll", "English", "1865", "100 million"],
 ]
 
 var Excel = createReactClass({
   displayName: 'Excel',
+
+  propTypes: {
+    haders: PropTypes.arrayOf(
+      PropTypes.string
+    ),
+    initialData: PropTypes.arrayOf(
+      PropTypes.arrayOf(
+        PropTypes.string
+      )
+    ),
+  },
+
+  getInitialState: function() {
+    return { data: this.props.initialData };
+  },
+
   render: function() {
     return(
       <table>
@@ -29,11 +45,26 @@ var Excel = createReactClass({
           <tr>
             {
               this.props.headers.map(function(title, idx) {
-                return <th key={ idx }>{title}</th>;
+                return <th key={ idx }>{ title }</th>;
               })
             }
           </tr>
         </thead>
+        <tbody>
+          {
+            this.state.data.map(function(row, idx) {
+              return(
+                <tr key={ idx }>
+                  {
+                    row.map(function(cell, idx) {
+                      return(<td key={ idx }>{ cell }</td>);
+                    })
+                  }
+                </tr>
+              );
+            })
+          }
+        </tbody>
       </table>
     );
   }
