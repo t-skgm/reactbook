@@ -83,6 +83,36 @@ var Excel = createReactClass({
     });
   },
 
+  _preSearchData: null,
+
+  _toggleSearch: function() {
+    if (this.state.search) {
+      this.setState({
+        data: this._preSearchData,
+        search: false,
+      });
+      this._preSearchData = null;
+    } else {
+      this._preSearchData = this.state.data;
+      this.setState({
+        search: true,
+      });
+    }
+  },
+
+  _search: function(e) {
+    const needle = e.target.value.toLowerCase();
+    if (!needle) { // when search text is empty
+      this.setState({ data: this._preSearchData });
+      return;
+    }
+    const idx = e.target.dataset.idx; // target column idx
+    const searchData = this._preSearchData.filter(function(row) {
+      return row[idx].toString().toLowerCase().indexOf(needle) > -1;
+    });
+    this.setState({ data: searchData });
+  },
+
   render: function() {
     return(
       <div>
@@ -105,9 +135,9 @@ var Excel = createReactClass({
         {
           this.props.headers.map(function(_, idx) {
             return(
-              <tb key={ idx }>
+              <td key={ idx }>
                 <input type="text" data-idx={ idx } />
-              </tb>
+              </td>
             );
           })
         }
