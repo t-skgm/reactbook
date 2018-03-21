@@ -19,3 +19,30 @@ const data = [
   ["紅樓夢/红楼梦 (Dream of the Red Chamber)", "Cao Xueqin", "Chinese", "1754", "100 million"],
   ["Alice's Adventures in Wonderland", "Lewis Carroll", "English", "1865", "100 million"]
 ]
+
+var Excel = createReactClass({
+  displayName: 'Excel',
+  render: function() {
+    return(
+      <table>
+        <thead>
+          <tr>
+            {
+              this.props.headers.map(function(title, idx) {
+                return <th key={ idx }>{title}</th>;
+              })
+            }
+          </tr>
+        </thead>
+      </table>
+    );
+  }
+});
+
+ReactDOM.render(
+  React.createElement(Excel, {
+    headers: headers,
+    initialData: data,
+  }),
+  document.getElementById("app")
+);
