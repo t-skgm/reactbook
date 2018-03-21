@@ -24,7 +24,7 @@ var Excel = createReactClass({
   displayName: 'Excel',
 
   propTypes: {
-    haders: PropTypes.arrayOf(
+    headers: PropTypes.arrayOf(
       PropTypes.string
     ),
     initialData: PropTypes.arrayOf(
@@ -38,10 +38,21 @@ var Excel = createReactClass({
     return { data: this.props.initialData };
   },
 
+  _sort: function(e) {
+    const column = e.target.cellIndex;
+    const data = Array.from(this.state.data);
+    data.sort(function(a, b) {
+      return a[column] > b[column] ? 1 : -1;
+    });
+    this.setState({
+      data: data,
+    });
+  },
+
   render: function() {
     return(
       <table className="table table-striped">
-        <thead>
+        <thead onClick={ this._sort }>
           <tr>
             {
               this.props.headers.map(function(title, idx) {
