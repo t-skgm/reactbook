@@ -40,7 +40,7 @@ var Excel = createReactClass({
 
   render: function() {
     return(
-      <table>
+      <table className="table table-striped">
         <thead>
           <tr>
             {
