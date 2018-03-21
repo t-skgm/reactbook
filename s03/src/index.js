@@ -92,8 +92,14 @@ var Excel = createReactClass({
                 <tr key={ rowidx }>
                   {
                     row.map(function(cell, idx) {
-                      const content = cell;
-                      // FIX
+                      let content = cell;
+                      const edit = this.state.edit;
+                      if (edit && edit.row === rowidx && edit.cell === idx) {
+                        content =
+                          <form onSubmit={ this._save }>
+                            <input type="text" defaultValue={ content }></input>
+                          </form>;
+                      }
                       return(<td key={ idx } data-row={ rowidx }>{ content }</td>);
                     }, this)
                   }
