@@ -35,17 +35,28 @@ var Excel = createReactClass({
   },
 
   getInitialState: function() {
-    return { data: this.props.initialData };
+    return {
+      data: this.props.initialData,
+      sortby: null,
+      descending: false,
+    };
   },
 
   _sort: function(e) {
     const column = e.target.cellIndex;
     const data = Array.from(this.state.data);
+    const descending = this.state.sortby === column && !this.state.descending;
+
     data.sort(function(a, b) {
-      return a[column] > b[column] ? 1 : -1;
+      return descending
+        ? (a[column] < b[column] ? 1 : -1)
+        : (a[column] > b[column] ? 1 : -1);
     });
+
     this.setState({
       data: data,
+      sortby: column,
+      descending: descending,
     });
   },
 
@@ -56,8 +67,11 @@ var Excel = createReactClass({
           <tr>
             {
               this.props.headers.map(function(title, idx) {
+                if (this.state.sortby === idx) {
+                  title += this.state.descending ? ' \u2191' : ' \u2193'
+                }
                 return <th key={ idx }>{ title }</th>;
-              })
+              }, this)
             }
           </tr>
         </thead>
