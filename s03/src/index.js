@@ -70,6 +70,18 @@ var Excel = createReactClass({
     });
   },
 
+  _save: function(e) {
+    e.preventDefault(); // Disable default submit action
+    const input = e.target.firstChild;
+    const data = this.state.data.slice();
+    data[this.state.edit.row][this.state.edit.cell] = input.value;
+
+    this.setState({
+      edit: null, // finish editing
+      data: data,
+    });
+  },
+
   render: function() {
     return(
       <table className="table table-striped">
