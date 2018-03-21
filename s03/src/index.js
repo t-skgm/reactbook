@@ -40,6 +40,7 @@ var Excel = createReactClass({
       sortby: null,
       descending: false,
       edit: null, // { row: row-index, cell: cell-index }
+      search: false,
     };
   },
 
@@ -84,6 +85,38 @@ var Excel = createReactClass({
 
   render: function() {
     return(
+      <div>
+        { this._renderToolbar() }
+        { this._renderTable() }
+      </div>
+    )
+  },
+
+  _renderToolbar: function() {
+    return <button onClick={ this._toggleSearch } className="toolbar">検索</button>;
+  },
+
+  _renderSearch: function() {
+    if (!this.state.search) {
+      return null;
+    }
+    return(
+      <tr onChange={ this._search }>
+        {
+          this.props.headers.map(function(_, idx) {
+            return(
+              <tb key={ idx }>
+                <input type="text" data-idx={ idx } />
+              </tb>
+            );
+          })
+        }
+      </tr>
+    );
+  },
+
+  _renderTable: function() {
+    return(
       <table className="table table-striped">
         <thead onClick={ this._sort }>
           <tr>
@@ -98,8 +131,8 @@ var Excel = createReactClass({
           </tr>
         </thead>
         <tbody onDoubleClick={ this._showEditor }>
-          {
-            this.state.data.map(function(row, rowidx) {
+          { this._renderSearch() }
+          { this.state.data.map(function(row, rowidx) {
               return(
                 <tr key={ rowidx }>
                   {
@@ -109,7 +142,7 @@ var Excel = createReactClass({
                       if (edit && edit.row === rowidx && edit.cell === idx) {
                         content =
                           <form onSubmit={ this._save }>
-                            <input type="text" defaultValue={ content }></input>
+                            <input type="text" defaultValue={ content } />
                           </form>;
                       }
                       return(<td key={ idx } data-row={ rowidx }>{ content }</td>);
