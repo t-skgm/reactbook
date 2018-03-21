@@ -39,6 +39,7 @@ var Excel = createReactClass({
       data: this.props.initialData,
       sortby: null,
       descending: false,
+      edit: null, // { row: row-index, cell: cell-index }
     };
   },
 
@@ -60,6 +61,15 @@ var Excel = createReactClass({
     });
   },
 
+  _showEditor: function(e) {
+    this.setState({
+      edit: {
+        row: parseInt(e.target.dataset.row, 10),
+        cell: e.target.cellIndex,
+      }
+    });
+  },
+
   render: function() {
     return(
       <table className="table table-striped">
@@ -75,19 +85,21 @@ var Excel = createReactClass({
             }
           </tr>
         </thead>
-        <tbody>
+        <tbody onDoubleClick={ this._showEditor }>
           {
-            this.state.data.map(function(row, idx) {
+            this.state.data.map(function(row, rowidx) {
               return(
-                <tr key={ idx }>
+                <tr key={ rowidx }>
                   {
                     row.map(function(cell, idx) {
-                      return(<td key={ idx }>{ cell }</td>);
-                    })
+                      const content = cell;
+                      // FIX
+                      return(<td key={ idx } data-row={ rowidx }>{ content }</td>);
+                    }, this)
                   }
                 </tr>
               );
-            })
+            }, this)
           }
         </tbody>
       </table>
